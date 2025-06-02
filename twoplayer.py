@@ -67,7 +67,7 @@ def main():
                 "\n\n" + colorama.Back.RED + colorama.Fore.BLACK + f"{player1.name}'s Health: {player1.health},Shield Points: {player1.shield_points}, PP: {player1.pp}, Charge Uses: {player1.charge_uses}")
             print(
                 colorama.Back.BLUE + colorama.Fore.BLACK + f"{player2.name}'s Health: {player2.health},Shield Points: {player2.shield_points} PP: {player2.pp}, Charge Uses: {player2.charge_uses}")
-            FunctionMoveControllers.actihon_controller_main(player1,player2)
+            FunctionMoveControllers.action_controller_main(player1,player2)
             #player 2 turn
             print(
                 "\n\n" + colorama.Back.RED + colorama.Fore.BLACK + f"{player1.name}'s Health: {player1.health},Shield Points: {player1.shield_points}, PP: {player1.pp}, Charge Uses: {player1.charge_uses}")
@@ -76,10 +76,10 @@ def main():
             print(f"{player2.name}\'s turn")
             FunctionMoveControllers.action_controller_main(player2,player1)
         # Determine winner
-        if player1.is_alive() :
+        if player1.is_alive() and player2.is_alive() ==False:
             print(f"{player1.name} has defeated {player2.name}!")
             break
-        else:
+        elif player1.is_alive()== False:
             print(f"{player2.name} has defeated {player1.name}!")
             break
 if __name__ == "__main__":
