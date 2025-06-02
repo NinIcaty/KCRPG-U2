@@ -64,7 +64,13 @@ def main():
     heros = [
         ClassCharechter.Character("Asher", 100, 1, 20, 75, 5, 1,0,"asher_hero"),
         ClassCharechter.Character("Biochemist", 120, 1, 25, 80, 6, 1,0,"biochemistry_hero"),
-        ClassCharechter.Character("Anaconda", 100, 1, 22, 75, 5, 1,0,"anaconda")
+        ClassCharechter.Character("Anaminion", 100, 1, 22, 75, 5, 1,0,"anaminion"),
+        ClassCharechter.Character("Anaconda", 100, 1, 22, 75, 5, 1,0,"anaconda"),
+       ClassCharechter.Character("Sane Scientist", 120, 1, 25, 80, 6, 1,0,"biochemistry_hero"),
+        ClassCharechter.Character("Anaminion 2", 100, 1, 22, 75, 5, 1,0,"anaminion"),
+        ClassCharechter.Character("Anaconda", 100, 1, 22, 75, 5, 1,0,"anaconda2"),
+
+
     ]
     # Randomly assign a potion at the start
     potions = ["HP Potion", "PP Potion", "Attack Potion", "Shield Potion"]
@@ -98,8 +104,12 @@ def main():
                     player.shield_points += 60
                     input(colorama.Fore.GREEN+"Press ENTER to start")
                     player.pp += 50 + player.attack_power * 3
-                elif hero.name == "Anaconda":
+                elif hero.char_type == "a   naconda":
                     print("Anaconda:You have NOT killed me !\n  I shall defeat you and the council of Villany!")
+
+                elif hero.name == "Anaminion 2":
+                                    print("Anaconda:Ha you thought you had defeated me!\n How foolish of you. ")
+
     if player.is_alive():
         print("You Have proved yourself to the council of Villany now you truly are a Villan.")
         ClassCharechter.Character
