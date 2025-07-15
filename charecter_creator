@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Character Creator</title>
+  <style>
+    body { font-family: Arial; margin: 20px; }
+    .stat { margin-bottom: 10px; }
+    .stat span { display: inline-block; width: 150px; }
+    input { padding: 4px; margin-bottom: 10px; width: 300px; }
+  </style>
+</head>
+<body>
+  <h2>Custom Class Creator</h2>
+  <label>
+    Class Name:
+    <input type="text" id="className" placeholder="Enter class name">
+  </label>
+  <p>Available SP: <span id="sp">100</span></p>
+
+  <div class="stat">
+    <span>HP:</span>
+    <select id="hp" onchange="calculate()">
+      <option value="10" data-cost="0">10 HP (0 SP)</option>
+      <option value="20" data-cost="5">20 HP (5 SP)</option>
+      <option value="50" data-cost="15">50 HP (15 SP)</option>
+      <option value="75" data-cost="20">75 HP (20 SP)</option>
+      <option value="100" data-cost="25">100 HP (25 SP)</option>
+      <option value="150" data-cost="30">150 HP (30 SP)</option>
+      <option value="200" data-cost="75">200 HP (75 SP)</option>
+    </select>
+  </div>
+
+  <div class="stat">
+    <span>PP:</span>
+    <select id="pp" onchange="calculate()">
+      <option value="0" data-cost="0">0 PP (0 SP)</option>
+      <option value="30" data-cost="10">30 PP (10 SP)</option>
+      <option value="75" data-cost="20">75 PP (20 SP)</option>
+      <option value="100" data-cost="25">100 PP (25 SP)</option>
+      <option value="150" data-cost="75">150 PP (75 SP)</option>
+    </select>
+  </div>
+
+  <div class="stat">
+    <span>Charge Amount:</span>
+    <select id="charge" onchange="calculate()">
+      <option value="1" data-cost="0">1 (0 SP)</option>
+      <option value="5" data-cost="10">5 (10 SP)</option>
+      <option value="15" data-cost="50">15 (50 SP)</option>
+    </select>
+  </div>
+
+  <div class="stat">
+    <span>Attack Power:</span>
+    <select id="attack" onchange="calculate()">
+      <option value="15" data-cost="0">15 AP (0 SP)</option>
+      <option value="20" data-cost="15">20 AP (15 SP)</option>
+      <option value="25" data-cost="25">25 AP (25 SP)</option>
+      <option value="30" data-cost="50">30 AP (50 SP)</option>
+      <option value="40" data-cost="75">40 AP (75 SP)</option>
+    </select>
+  </div>
+
+  <button onclick="calculate()">Finish</button>
+
+  <h3>Result:</h3>
+  <pre id="result"></pre>
+
+  <script>
+    const spDisplay = document.getElementById('sp');
+    const selects = ['hp', 'pp', 'charge', 'attack'].map(id => document.getElementById(id));
+    const result = document.getElementById('result');
+    const classNameInput = document.getElementById('className');
+
+    function calculate() {
+      let totalCost = 0;
+      let config = {};
+      for (const sel of selects) {
+        const opt = sel.options[sel.selectedIndex];
+        const value = parseInt(opt.value);
+        const cost = parseInt(opt.dataset.cost);
+        config[sel.id] = value;
+        totalCost += cost;
+      }
+
+      const remainingSP = 100 - totalCost;
+      spDisplay.textContent = remainingSP;
+
+      const className = classNameInput.value.trim();
+      if (remainingSP < 0) {
+        result.textContent = '❌ Not enough SP!';
+      } else if (!className) {
+        result.textContent = '❌ Please enter a class name!';
+      } else {
+        const chargePPPower = (config.charge * 0.5);
+        const output = `elif self.char_type == "${className}":
+    self.charge_pp_power = ${chargePPPower}
+    self.health = ${config.hp}
+    self.attack_power = ${config.attack}
+    self.pp = ${config.pp}
+    self.max_health = ${config.hp * 1.5}
+    self.charge_uses = ${config.charge}`;
+        result.textContent = output;
+      }
+    }
+
+    window.onload = calculate;
+  </script>
+</body>
+</html>
