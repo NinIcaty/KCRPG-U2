@@ -3,7 +3,7 @@ import ClassCharechter
 import FunctionMoveControllers
 import colorama
 colorama.init(autoreset=True)
-
+savedcharecter = ClassCharechter.saved_chatacters
 '''
 def get_potion_choice(character):
 
@@ -26,18 +26,17 @@ def main():
     player_name = input("Enter your character's name: ")
 
     print("Classes are:")
-    print("1. Mage")
-    print("2. Warrior")
-    print("3. Rogue")
+    print(savedcharecter)
 
     while True:
         try:
-            char_choice = int(input("Choose a class (use  numbers) (1-3): "))
+            char_choice = int(input("Choose a class (use  numbers)  : "))
             # test/god mode
             # if char_choice == 789123 :char_type = "god"
             # Remember to remove test/god mode
             if 1 <= char_choice <= 5:
-                char_types = ["Mage", "Warrior", "Rogue", "god"]
+                char_types = savedcharecter
+
                 char_type = char_types[char_choice - 1]
                 break
             else:
