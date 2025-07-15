@@ -2,6 +2,9 @@ import FunctionAction
 import colorama
 import random
 
+saved_chatacters = ["Mage","Warrior","Rogue"]
+
+
 class Character:
     def __init__(self, name, health,max_health, attack_power, pp,charge_pp_power, charge_uses,shield_points, char_type):
         self.name = name
@@ -79,6 +82,8 @@ class Character:
             self.pp = 500
             self.charge_uses = 20
             self.max_health = 1125
+
+
     def is_alive(self):
         return self.health > 0
     def ai_action(self, opponent):
