@@ -1,6 +1,9 @@
 import FunctionAction
 import colorama
 import random
+import math
+saved_chatacters = ["Mage","Warrior","Rogue"]
+
 
 class Character:
     def __init__(self, name, health,max_health, attack_power, pp,charge_pp_power, charge_uses,shield_points, char_type):
@@ -79,6 +82,15 @@ class Character:
             self.pp = 500
             self.charge_uses = 20
             self.max_health = 1125
+        else:
+            self.charge_pp_power = self.charge_pp_power
+            self.health = self.health
+            self.attack_power = self.attack_power
+            self.pp = self.pp
+            self.charge_uses = self.charge_uses
+            self.charge_pp_power = math.floor(self.charge_uses / 2)
+            self.max_health = math.floor(self.health * 1.4)
+
     def is_alive(self):
         return self.health > 0
     def ai_action(self, opponent):
