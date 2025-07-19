@@ -38,7 +38,17 @@ def attack(self, other, attack_type):
                 colorama.Back.YELLOW + colorama.Fore.BLACK + f"{self.name} uses Super Attack on {other.name} for {damage} damage! (Cost: 20 PP)")
     elif attack_type == "special":
         if self.pp >= 25:
-            damage = random.randint(15, self.attack_power + 15)
+            if self.char_type == "Mage":
+                damage = random.randint(20, self.attack_power + 15)
+                self.health += 10
+            elif self.char_type == "Warrior":
+                damage = random.randint(30, self.attack_power * 1.5)
+                self.shield_points += 5
+            elif self.char_type == "Rouge":
+                damage = random.randint(30, self.attack_power * 1.5)
+                self.health += 5
+                self.shield_points += 5
+            else:damage = random.randint(15, self.attack_power + 15)
             if other.shield_points > damage:
                 other.shield_points -= damage
                 damage = 0
@@ -48,7 +58,7 @@ def attack(self, other, attack_type):
             other.health -= damage
             self.pp -= 25
             print(
-                colorama.Back.YELLOW + colorama.Fore.BLACK + f"{self.name} uses Special Attack on {other.name} for {damage} damage! (Cost: 25 PP)")
+                colorama.Back.YELLOW + colorama.Fore.BLACK + f"{self.name} used their Special Move on {other.name} for {damage} damage! (Cost: 25 PP)")
     elif attack_type == "explosive":
         if self.pp >= 30:
             damage = random.randint(20, self.attack_power + 20)
