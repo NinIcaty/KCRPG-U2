@@ -46,7 +46,7 @@ def create_custom_character(player_name):
 
     max_health = hp
     charge_pp_power = 5  # Default fixed charge power for custom characters
-    return ClassCharechter.Character(player_name, hp, max_health, attack, pp, charge_pp_power, charge_uses, 0, "custom")
+    return ClassCharechter.Character(player_name, hp, max_health, attack, pp, charge_pp_power, charge_uses, 0,0, "custom")
 
 def main():
     player_name = input("Enter your character's name: ")
@@ -65,7 +65,7 @@ def main():
 
             if 1 <= char_choice <= len(savedcharecter):
                 char_type = savedcharecter[char_choice - 1]
-                player = ClassCharechter.Character(player_name, 1, 100, 20, 75, 5, 1, 0, char_type)
+                player = ClassCharechter.Character(player_name, 1, 100, 20, 75, 5, 1, 0,0, char_type)
                 break
             elif char_choice == len(savedcharecter) + 1:
                 player = create_custom_character(player_name)
@@ -101,7 +101,10 @@ def main():
         while player.is_alive() and hero.is_alive():
             print("\n\n" + colorama.Back.RED + colorama.Fore.BLACK + f"{hero.name}'s Health: {hero.health}, Shield: {hero.shield_points}, PP: {hero.pp}, Charge Uses: {hero.charge_uses}")
             print(colorama.Back.BLUE + colorama.Fore.BLACK + f"{player.name}'s Health: {player.health}, Shield: {player.shield_points}, PP: {player.pp}, Charge Uses: {player.charge_uses}")
-
+            if player.poison_strength != 0:
+                player.health -= player.poison_strength
+                print(colorama.Fore.GREEN+f"{player_name} got hurt by their poison for {player.poison_strength}")
+                player.poison_strength -= 5
             FunctionMoveControllers.action_controller_main(player, hero)
             if hero.is_alive():
                 hero.ai_action(player)
