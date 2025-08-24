@@ -139,11 +139,29 @@ def heal(self, heal_type):
         if self.pp >= 40:
             heal_amount = random.randint(40, 60)
             self.health += heal_amount
+            poison_strength = random.randint(0,100)
+
+
             if self.health > self.max_health: self.health = self.max_health
             self.pp -= 40
-            print(
-                colorama.Back.YELLOW + colorama.Fore.BLACK + f"{self.name} performs an Ultimate Heal for {heal_amount} HP! (Cost: 40 PP)")
+            if poison_strength <= 70 :
+                self.poison_strength = 0
+                print(
+                    colorama.Back.YELLOW + colorama.Fore.BLACK + f"{self.name} performs an Ultimate Heal for {heal_amount} HP! (Cost: 40 PP)")
+            elif poison_strength <= 80 and poison_strength >= 70:
 
+                self.poison_strength = 5
+                print(
+                    colorama.Back.YELLOW + colorama.Fore.BLACK + f"{self.name} performs an Ultimate Heal for {heal_amount} HP! (Cost: 40 PP) But also poisoned themself accidentally .The poison is of an unknown power.")
+            elif poison_strength <= 95 and poison_strength >= 80:
+                 self.poison_strength = 10
+                 print(
+                 colorama.Back.YELLOW + colorama.Fore.BLACK + f"{self.name} performs an Ultimate Heal for {heal_amount} HP! (Cost: 40 PP) But also poisoned themself accidentally .The poison is of an unknown power.")
+            elif poison_strength <= 95 and poison_strength >= 80:
+
+                self.poison_strength = 20
+                print(colorama.Back.YELLOW + colorama.Fore.BLACK + f"{self.name} performs an Ultimate Heal for {heal_amount} HP! (Cost: 40 PP) But also poisoned themself accidentally .The poison is of an unknown power.")
+        
 #Copy For others in next Update
 def shield(self, shield_type):
     shield_costs = {"light": 20, "medium": 30, "heavy": 50, "reflective": 40}
@@ -158,3 +176,4 @@ def shield(self, shield_type):
                 colorama.Fore.BLACK + f"{colorama.Back.YELLOW+self.name} activates a {shield_type.capitalize()} Gaining {shield_values[shield_type]} Shield Points! (Cost: {cost} PP)")
         else:
             print(f"{self.name} doesn't have enough PP for {shield_type.capitalize()} Shield!")
+
