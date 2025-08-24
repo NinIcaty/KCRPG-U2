@@ -6,7 +6,7 @@ saved_chatacters = ["Mage","Warrior","Rogue"]
 
 
 class Character:
-    def __init__(self, name, health,max_health, attack_power, pp,charge_pp_power, charge_uses,shield_points, char_type):
+    def __init__(self, name, health,max_health, attack_power, pp,charge_pp_power, charge_uses,shield_points,poison_strength, char_type):
         self.name = name
         self.health = health
         self.max_health = max_health
@@ -126,3 +126,4 @@ class Character:
             self.shield_strength += 10
             print(colorama.Fore.BLACK+colorama.Back.YELLOW+f"{self.name} uses a Shield Potion and gains 10 shield strength!")
 '''
+
